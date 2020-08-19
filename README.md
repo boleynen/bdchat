@@ -1,2 +1,1 @@
-"# bdchat" 
-"# bdchat" 
+"# bdchat"
