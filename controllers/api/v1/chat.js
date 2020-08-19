@@ -1,11 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const chatSchema = new Schema({
-    message: String,
-    user: String
-});
-
-const Chat = mongoose.model('Chat', chatSchema);
+const Chat = require('../../../models/chat')
 
 const getAll = (req, res) => {
     Chat.find({
@@ -21,11 +14,18 @@ const getAll = (req, res) => {
     
 }
 
-const create = (req, res) => {
+const create = (req, res, next) => {
+    console.log(req.body);
     let chat = new Chat();
-    chat.message = "Hey, nice to meet you !";
-    chat.user = "Bo"
+    chat.message = req.body.message;
+    chat.user = req.body.user;
     chat.save((err, doc) => {
+        if(err){
+            res.json({
+                "status": "error",
+                "message": "Could not save message"
+            })
+        }
         if(!err){
             res.json({
                 "status": "success",
@@ -33,7 +33,6 @@ const create = (req, res) => {
                     "message": doc
                 }
             })
-            
         }
     });
 }
