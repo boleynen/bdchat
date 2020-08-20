@@ -1,15 +1,20 @@
 
 
 let btnSignup = document.querySelector("#btn-signup");
-let username = document.querySelector("#username-input");
-let password = document.querySelector("#password-input");
 
 btnSignup.addEventListener("click", function(){
+
+    let username = document.querySelector("#username-input").value;
+    let password = document.querySelector("#password-input").value;
 
     fetch('http://localhost:3000/users/signup', {
         method: "post",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Methods': 'Content-Type'
+
         },
         body: JSON.stringify({
             "username": username,
@@ -23,5 +28,7 @@ btnSignup.addEventListener("click", function(){
             feedback.textContent = "sign up complete";
             feedback.classList.remove('hidden');
         }
+    }).catch(error => {
+        console.log(error);
     })
 });

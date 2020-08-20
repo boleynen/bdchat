@@ -159,7 +159,6 @@ body {
 
 .input-group__form footer a {
   display: inline-block;
-  margin-top: 20px;
   color: #729B79;
   text-decoration: none;
   text-align: right;
@@ -173,5 +172,6 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
+  margin-top: 20px;
 }
 /*# sourceMappingURL=style.css.map */
