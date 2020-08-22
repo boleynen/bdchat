@@ -4,8 +4,9 @@ let btnSignup = document.querySelector("#btn-signup");
 
 btnSignup.addEventListener("click", function(){
 
-    let username = document.querySelector("#username-input").value;
-    let password = document.querySelector("#password-input").value;
+    let username    = document.querySelector("#username-input").value;
+    let password    = document.querySelector("#password-input").value;
+    let date        = document.querySelector("#date-input").value;
 
     fetch('http://localhost:3000/users/signup', {
         method: "post",
