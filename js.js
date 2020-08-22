@@ -19,7 +19,8 @@ btnSignup.addEventListener("click", function(){
         },
         body: JSON.stringify({
             "username": username,
-            "password": password
+            "password": password,
+            "date" : date
         })
     }).then(response => {
         return response.json();
@@ -33,3 +34,9 @@ btnSignup.addEventListener("click", function(){
         console.log(error);
     })
 });
+
+let btnLogin= document.querySelector("#btn-login");
+
+btnLogin.addEventListener("click", function(){
+    alert("ss");
+})

@@ -5,15 +5,17 @@ const jwt = require('jsonwebtoken');
 const signup = async (req, res, next) => {
     let username    = req.body.username;
     let password    = req.body.password;
+    let date        = req.body.date;
 
     const user = new User({
-        username: username
+        username: username,
+        date: date
     });
 
     await user.setPassword(password);
     await user.save()
     .then(result => {
-        console.log(result._id);
+        console.log(token);
         let token = jwt.sign({
             uid: result._id,
             username: result.username
@@ -41,6 +43,13 @@ const login = async (req, res, next) => {
                 "user" : result
             }
         });
+        // window.location.replace("index.html");
+        if (status.status == "success"){
+            window.location.href = "index.html";
+          }
+          else{
+            alert("error occured");
+          }
     }).catch(error => {
         res.json({
             "status" : "error",

@@ -8,6 +8,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiChatRouter = require('./routes/api/v1/chat');
 const passport = require('./passport/passport');
+const socketIo = require('socket.io');
 
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
