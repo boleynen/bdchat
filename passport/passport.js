@@ -22,11 +22,14 @@ passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
         _id: jwt_payload.uid
     }, function (err, user) {
         if (err) {
+            console.log("1");
             return done(err, false);
         }
         if (user) {
+            console.log("2");
             return done(null, user);
         } else {
+            console.log("3");
             return done(null, false);
             // or you could create a new account
         }

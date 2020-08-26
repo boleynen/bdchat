@@ -15,10 +15,10 @@ const getAll = (req, res) => {
 }
 
 const create = (req, res, next) => {
-    console.log(req.body);
+    // console.log(req.body);
     let chat = new Chat();
     chat.message = req.body.message;
-    chat.user = req.body.user;
+    chat.username = req.body.username;
     chat.save((err, doc) => {
         if(err){
             res.json({

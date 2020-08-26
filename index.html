@@ -13,23 +13,37 @@
 <body>
     
     <main class="chatbox">
-        <div class="chatbox__birthday">
-            <p>There are X people registered who share your birthday.</p>
-            <p>Your are now chatting with X of them. Say hi!</p>
+        <div class="chatbox__header">
+            <div class="header__info">
+                <p>There are X people registered who share your birthday.</p>
+                <p>Your are now chatting with X of them. Say hi!</p>
+            </div>
+            <button class="header__logout">Logout</button>
+            </div>
         </div>
 
-        <ul class="chatbox__output">
-            <li>
-                <p>Sara Thompson</p>
-                <p class="bold">Hey! Nice to meet you.</p>
+        <div class="chatbox__people">
+            <ul class="chatbox__ul overflow">
+                <li class="chatbox__li">Dave Richards</li>
+                <li class="chatbox__li">Sara Thompson</li>
+                <li class="chatbox__li">Erica Capenter</li>
+                <li class="chatbox__li">Mike Thomas</li>
+                <li class="chatbox__li">Jake Chavez</li>
+
+            </ul>
+        </div>
+        <ul class="chatbox__output clearfix overflow">
+            <li class="chatbox__output-received message">
+                <div>
+                    <p class="user">Sara Thompson</p>
+                    <p class="textmessage bold">Hello!</p>
+                </div>
             </li>
-            <li>
-                <p>Sara Thompson</p>
-                <p class="bold">Hey! Nice to meet you.</p>
-            </li>
-            <li>
-                <p>Sara Thompson</p>
-                <p class="bold">Hey! Nice to meet you.</p>
+            <li class="chatbox__output-send message">
+                <div>
+                    <p class="user">Me</p>
+                    <p class="textmessage bold">Hey! Nice to meet you.</p>
+                </div>
             </li>
         </ul>
 
@@ -39,7 +53,7 @@
         </form>
     </main>
 
-    <!-- <script src="js.js"></script> -->
+    <script src="js/index.js"></script>
 
 </body>
 </html>
