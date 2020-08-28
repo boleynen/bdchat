@@ -9,7 +9,7 @@ if(btnLogin){
         let username    = document.querySelector(".input-login-user").value;
         let password    = document.querySelector(".input-login-pass").value;
 
-        fetch('http://localhost:3000/users/login', {
+        fetch('http://localhost:3000/account/login', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,10 @@ if(btnLogin){
             if(json.status === "success"){
                 let token = json.data.token;
                 localStorage.setItem("token", token);
-                window.location.href = "index.html";
+                localStorage.setItem("birthdate", json.data.birthdate);
+
+                window.location.href = "index.html?";
+                
             }else{
                 alert("Login failed .. 😥😥");
             }

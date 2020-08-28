@@ -11,7 +11,7 @@ if(btnSignup){
         let password    = document.querySelector(".input-signup-pass").value;
         let date        = document.querySelector("#date-input").value;
     
-        fetch('http://localhost:3000/users/signup', {
+        fetch('http://localhost:3000/account/signup', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json',

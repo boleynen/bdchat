@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Account = require('../models/Account');
 const jwt = require('jsonwebtoken');
 
 
@@ -7,13 +8,13 @@ const signup = async (req, res, next) => {
     let password    = req.body.password;
     let date        = req.body.date;
 
-    const user = new User({
-        username: username,
-        date: date
+    const account = new Account({
+        username: username
     });
 
-    await user.setPassword(password);
-    await user.save()
+    await account.setPassword(password);
+    await account.save()
+
     .then(result => {
         // console.log(result);
         let token = jwt.sign({
@@ -27,7 +28,23 @@ const signup = async (req, res, next) => {
                 "token": token
             }
         })
-        // console.log(token);
+
+        Account.findOne({
+            username: username
+        }, function(error, u) {
+
+            const user = new User({
+                date: date,
+                account: {
+                    id: u._id,
+                    username: u.username 
+                }
+            })
+        
+            user.save();
+        })
+
+        
     }).catch(error => {
         res.json({
             "status" : "error",
@@ -38,7 +55,7 @@ const signup = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-    const user = await User.authenticate()(req.body.username, req.body.password)
+    const account = await User.authenticate()(req.body.username, req.body.password)
     .then(result => {
         if(!result.user){
             return res.json({
@@ -58,6 +75,7 @@ const login = async (req, res, next) => {
                 "token" : token
             }
         });
+
 
     }).catch(error => {
         res.json({

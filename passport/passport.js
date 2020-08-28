@@ -1,13 +1,13 @@
 const passport = require('passport');
-const User = require('../models/User');
+const Account = require('../models/Account');
 
 
 // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
-passport.use(User.createStrategy());
+passport.use(Account.createStrategy());
 
 // serialize user data for sessions
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 
 // WEBTOKEN STRATEGY (JWT)
@@ -18,7 +18,7 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = 'MyVerySecretWord';
 
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    User.findOne({
+    Account.findOne({
         _id: jwt_payload.uid
     }, function (err, user) {
         if (err) {
