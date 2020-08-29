@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 
 let btnLogin= document.querySelector("#btn-login");
 
@@ -27,8 +27,13 @@ if(btnLogin){
         }).then(json => {
             if(json.status === "success"){
                 let token = json.data.token;
+
                 localStorage.setItem("token", token);
-                // window.location.href = "index.html?";
+
+                // const decodedJwt = jwt.decode(token, { complete: true });
+                // console.log(decodedJwt);
+                // localStorage.setItem("username", username);
+                window.location.href = "index.html";
                 
             }else{
                 alert("Login failed .. 😥😥");

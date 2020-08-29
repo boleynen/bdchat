@@ -1,53 +1,40 @@
-
-fetch("http://localhost/3000/birthday/:date", {
-    'headers': {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Methods': 'Content-Type'
-    }
-}).then(result => {
-    return result.json();
-}).then(json => {
-    console.log(json);
-    // console.log(localStorage.getItem('token'));
-}).catch(error =>{
-    console.log(error);
-});
+window.onload = () => {
+    let username = localStorage.getItem('username')
+    let token = localStorage.getItem('token')
 
 
+    // console.log(username);
+    fetch("http://localhost:3000/account/user/"+token, {
+        'headers': {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    }).then(result => {
+        return result.json();
+    }).then(date => {
 
+        fetch("http://localhost:3000/account/birthday/"+date, {
+            'headers': {
+                'Content-Type': 'application/json'
+            }
 
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            var namesArr = response.data.usernames
+            let ListPeopleOnline = document.querySelector(".chatbox__ul");
 
+            // console.log(namesArr);
+            namesArr.forEach(name => {
+                let listItem = document.createElement("li");
+                listItem.setAttribute("class", "chatbox__li");
+                let textnode = document.createTextNode(name);
+                listItem.appendChild(textnode);
+                ListPeopleOnline.appendChild(listItem);
+            });
 
-let sendBtn = document.querySelector("#send-message");
-
-// if(sendBtn){
-//     sendBtn.addEventListener("click", function(e){
-
-//         e.preventDefault();
-
-//         fetch('http://localhost:3000/api/v1/chat', {
-//             method: "post",
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Access-Control-Allow-Origin': '*',
-//                 'Access-Control-Allow-Methods': '*',
-//                 'Access-Control-Allow-Methods': 'Content-Type'
-//             },
-//             body: JSON.stringify({
-//                 "message": "est",
-//                 "user":  "testttt"
-//             })
-//         }).then(response => {
-//             return response.json();
-//         }).then(json => {
-//             if(json.status === "success"){
-//                 alert("posted!");
-//             }else{
-//                 alert("Login failed .. 😥😥");
-//             }
-//         })
-
-//     })
-// }
+        })
+        
+    }).catch(error => {
+        console.log(error);
+    });
+}

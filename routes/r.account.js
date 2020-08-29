@@ -9,9 +9,12 @@ const accountController = require('../controllers/api/v1/c.account.js');
 /* GET users listing. */
 router.get("/", accountController.getAll);
 
+
+//GET my birthdate
+router.get("/user/:token", accountController.getMyDate);
+
 // GET user ids with same birth date
 router.get("/birthday/:date", accountController.getUsersWithSameDate);
-
 
 // POST user signup
 router.post('/signup', authController.signup);

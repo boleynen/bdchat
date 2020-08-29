@@ -33,13 +33,13 @@ if(btnSignup){
             if(json.status === "success"){
                 alert("Sign up complete. Please login to start chatting!");
 
+                window.location = "login.html"
             }else if(json.status === "error_username"){
                 alert("Sign up failed: " + json.message);
             }else{
                 alert("Error: " + json.message);
             }
 
-            res.redirect("/birthday/"+json.data.date);
 
         }).catch(error => {
             console.log("Error: ", error);
