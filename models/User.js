@@ -13,8 +13,7 @@ const User = new Schema({
            type: mongoose.Schema.Types.ObjectId,
            ref: "Account",
            required: true
-        }, 
-        username: String
+        }
      }
 });
 

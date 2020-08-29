@@ -27,7 +27,7 @@ const create = (req, res, next) => {
         if(err){
             res.json({
                 "status": "error",
-                "message": "Could not save message"
+                "message": "Could not save message: " + err
             })
         }
         if(!err){

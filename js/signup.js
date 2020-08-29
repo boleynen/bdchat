@@ -1,4 +1,4 @@
-
+// const { response } = require("express");
 
 let btnSignup = document.querySelector("#btn-signup");
 
@@ -29,13 +29,17 @@ if(btnSignup){
             return response.json();
 
         }).then(json => {
-            // console.log(json.status);
-            // console.log(json);
+
             if(json.status === "success"){
                 alert("Sign up complete. Please login to start chatting!");
+
+            }else if(json.status === "error_username"){
+                alert("Sign up failed: " + json.message);
             }else{
-                alert("fail");
+                alert("Error: " + json.message);
             }
+
+            res.redirect("/birthday/"+json.data.date);
 
         }).catch(error => {
             console.log("Error: ", error);

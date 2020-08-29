@@ -8,54 +8,58 @@ const signup = async (req, res, next) => {
     let password    = req.body.password;
     let date        = req.body.date;
 
-    const account = new Account({
+    const registeredUsernames = Account.find({
         username: username
     });
 
-    await account.setPassword(password);
-    await account.save()
-
-    .then(result => {
-        // console.log(result);
-        let token = jwt.sign({
-            uid: result._id,
-            username: result.username
-        }, "someSecret");
-
+    if((await registeredUsernames).length > 0){
         res.json({
-            "status" : "success",
-            "data": {
-                "token": token
-            }
+            "status": "error_username",
+            "message": "Username already taken!"
         })
-
-        Account.findOne({
+    }else if((await registeredUsernames).length <= 0){
+        const account = new Account({
             username: username
-        }, function(error, u) {
+        });
+
+        await account.setPassword(password);
+        await account.save()
+
+        .then(result => {
 
             const user = new User({
                 date: date,
                 account: {
-                    id: u._id,
-                    username: u.username 
+                    id: result._id,
                 }
             })
-        
+
             user.save();
+
+                
+            res.json({
+                "status" : "success",
+                "data": {
+                    "date": date
+                }
+            })
+            
+            
+        }).catch(error => {
+            res.json({
+                "status" : "error",
+                "message": error
+            });
         })
 
         
-    }).catch(error => {
-        res.json({
-            "status" : "error",
-            "data": error
-        });
-        console.log("error: ", error);
-    })
+    }
+
 };
 
+
 const login = async (req, res, next) => {
-    const account = await User.authenticate()(req.body.username, req.body.password)
+    const account = await Account.authenticate()(req.body.username, req.body.password)
     .then(result => {
         if(!result.user){
             return res.json({
@@ -65,8 +69,7 @@ const login = async (req, res, next) => {
         }
 
         let token = jwt.sign({
-            uid: result.user._id,
-            username: result.user.username
+            uid: result.user._id
         }, "someSecret");
 
         return res.json({

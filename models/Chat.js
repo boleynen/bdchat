@@ -8,10 +8,6 @@ const chatSchema = new Schema({
     user: {
         type: String,
         required: true
-    },
-    user_id: {
-        type: String,
-        required: true
     }
 });
 

@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 let btnLogin= document.querySelector("#btn-login");
 
@@ -27,9 +28,7 @@ if(btnLogin){
             if(json.status === "success"){
                 let token = json.data.token;
                 localStorage.setItem("token", token);
-                localStorage.setItem("birthdate", json.data.birthdate);
-
-                window.location.href = "index.html?";
+                // window.location.href = "index.html?";
                 
             }else{
                 alert("Login failed .. 😥😥");
