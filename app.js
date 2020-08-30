@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const Promise = require("ejs");
+const Primus = require('primus');
 
 const indexRouter = require('./routes/r.index');
 const accountRouter = require('./routes/r.account');

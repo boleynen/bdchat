@@ -1,5 +1,7 @@
 const Chat = require('../../../models/chat')
+const User = require('../../../models/User.js')
 const jwt = require('jsonwebtoken');
+const { json } = require('express');
 
 
 // GET all chats
@@ -27,33 +29,80 @@ const create = (req, res, next) => {
     let myUsername = decodedJwt.payload.username
     let myId = decodedJwt.payload.uid
 
-    let chat = new Chat({
-        message: req.body.message,
-        user: myUsername
-    })
-
-    chat.save((err, doc) => {
+    User.find({
+        'account.id': myId 
+    }, (err, doc) => {
         if(err){
-            res.json({
-                "status": "error",
-                "message": "Could not save message: " + err
-            })
+            res.send(err)
         }
-        
-        res.json({
-            "status": "success",
-            "data": {
-                "chat": doc
-            }
+        return JSON.stringify(doc);
+    }).then(result => {
+
+        let chat = new Chat({
+            message: req.body.message,
+            user: myUsername,
+            chatroom: result[0]["date"]
         })
-        
-    });
+    
+        chat.save((err, doc) => {
+            if(err){
+                res.json({
+                    "status": "error",
+                    "message": "Could not save message: " + err
+                })
+            }
+            
+            res.json({
+                "status": "success",
+                "data": {
+                    "chat": doc
+                }
+            })
+            
+        });
+
+    }).catch(error => {
+        res.send(error)
+    }) 
+
+    
 }
 
 const getChatsFromYourChatroom = (req, res, next) => {
+
+    var urlWithDate = req.url;
+    var birthdate = urlWithDate.substring(urlWithDate.lastIndexOf("/") + 1);
+
     Chat.find({
     }, (err, chats) => {
-        
+
+        let chatsArr = [];
+        let c = {};
+
+        chats.forEach(chat => {
+            c["chatroom"] = chat.chatroom
+            let chatroom = JSON.stringify(chat.chatroom);
+            chatroom = chatroom.substring(1,11);
+            // console.log("chatroom: "+ chatroom + " type: "+ typeof(chatroom))
+            if(chatroom === birthdate){
+                chatsArr.push(chat)
+            }
+            // console.log(chatsArr);
+        })
+
+        if(err){
+            res.json({
+                "status": "error",
+                "message": err
+            })
+        }
+
+        res.json({
+            "status": "success",
+            "data": {
+                "chat": chatsArr
+            }
+        })
     })
 }
 

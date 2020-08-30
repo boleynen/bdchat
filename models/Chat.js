@@ -8,8 +8,11 @@ const chatSchema = new Schema({
     user: {
         type: String,
         required: true
+    },
+    chatroom: {
+        type: Date,
+        required: true
     }
-
 });
 
 const Chat = mongoose.model('Chat', chatSchema);
