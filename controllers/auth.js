@@ -27,6 +27,11 @@ const signup = async (req, res, next) => {
 
         .then(result => {
 
+            let token = jwt.sign({
+                uid: result._id,
+                username: result.username
+            }, "someSecret")
+
             const user = new User({
                 date: date,
                 account: {
@@ -40,7 +45,8 @@ const signup = async (req, res, next) => {
             res.json({
                 "status" : "success",
                 "data": {
-                    "date": date
+                    "date": date,
+                    "token": token
                 }
             })
             
@@ -69,7 +75,8 @@ const login = async (req, res, next) => {
         }
 
         let token = jwt.sign({
-            uid: result.user._id
+            uid: result.user._id,
+            username: result.user.username
         }, "someSecret");
 
         return res.json({

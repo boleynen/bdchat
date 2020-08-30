@@ -20,17 +20,26 @@ window.onload = () => {
         }).then(response => {
             return response.json();
         }).then(response => {
-            var namesArr = response.data.usernames
+            let namesArr = response.data.usernames
             let ListPeopleOnline = document.querySelector(".chatbox__ul");
+            let amountOfUsers = namesArr.length;
 
-            // console.log(namesArr);
+            let amountPeopleOutput = document.querySelector("#userAmount");
+            let amountPeople = document.createTextNode(amountOfUsers-1);
+            amountPeopleOutput.appendChild(amountPeople);
+
             namesArr.forEach(name => {
-                let listItem = document.createElement("li");
-                listItem.setAttribute("class", "chatbox__li");
-                let textnode = document.createTextNode(name);
-                listItem.appendChild(textnode);
-                ListPeopleOnline.appendChild(listItem);
+                if(name != username){
+                    let listItem = document.createElement("li");
+                    listItem.setAttribute("class", "chatbox__li");
+                    let textnode = document.createTextNode(name);
+                    listItem.appendChild(textnode);
+                    ListPeopleOnline.appendChild(listItem);
+                }
+
             });
+
+            
 
         })
         

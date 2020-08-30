@@ -36,11 +36,11 @@ app.use(cors({origin: '*'}));
 
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
-app.use('/api/v1/chat', apiChatRouter);
+// app.use('/api/v1/chat', apiChatRouter);
 
-// app.use('/api/v1/chat', passport.authenticate('jwt', {
-//   session: false 
-// }), apiChatRouter);
+app.use('/api/v1/chat', passport.authenticate('jwt', {
+  session: false 
+}), apiChatRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

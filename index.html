@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="public/styles/style.css">
     <link rel="shortcut icon" href="#">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@800&family=Roboto&display=swap');
@@ -15,8 +15,7 @@
     <main class="chatbox">
         <div class="chatbox__header">
             <div class="header__info">
-                <p>There are X people registered who share your birthday.</p>
-                <p>Your are now chatting with X of them. Say hi!</p>
+                <p>There are <span id="userAmount"></span> people registered who share your birthday.</p>
             </div>
             <button class="header__logout">
                 <a href="/logout">Logout</a></button>
@@ -30,7 +29,7 @@
             </ul>
         </div>
         <ul class="chatbox__output clearfix overflow">
-            <li class="chatbox__output-received message">
+            <!-- <li class="chatbox__output-received message">
                 <div>
                     <p class="user">Sara Thompson</p>
                     <p class="textmessage bold">Hello!</p>
@@ -41,16 +40,17 @@
                     <p class="user">Me</p>
                     <p class="textmessage bold">Hey! Nice to meet you.</p>
                 </div>
-            </li>
+            </li> -->
         </ul>
 
-        <form action="/" method="post" class="chatbox__form">
+        <form class="chatbox__form">
             <input type="text" placeholder="Type your message here..." class="chatbox__input">
             <button class="chatbox__send" id="send-message">Send</button>
         </form>
     </main>
 
     <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/chat.js"></script>
 
 </body>
 </html>

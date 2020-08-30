@@ -207,8 +207,8 @@ body {
   display: grid;
   -ms-grid-columns: 30% 70%;
       grid-template-columns: 30% 70%;
-  -ms-grid-rows: 20% 60% 20%;
-      grid-template-rows: 20% 60% 20%;
+  -ms-grid-rows: 70px 60% 70px;
+      grid-template-rows: 70px 60% 70px;
   background-color: #FFFFFF;
   border-radius: 0.2em;
   width: 700px;

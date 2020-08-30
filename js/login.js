@@ -29,15 +29,17 @@ if(btnLogin){
                 let token = json.data.token;
 
                 localStorage.setItem("token", token);
+                localStorage.setItem("username", username);
 
-                // const decodedJwt = jwt.decode(token, { complete: true });
-                // console.log(decodedJwt);
-                // localStorage.setItem("username", username);
                 window.location.href = "index.html";
                 
             }else{
                 alert("Login failed .. 😥😥");
             }
+        }).catch(error => {
+            console.log("Error: ", error);
+            alert(error);
+
         })
     })
 }

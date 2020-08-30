@@ -22,11 +22,6 @@ router.post('/signup', authController.signup);
 // POST user login
 router.post('/login', authController.login);
 
-// GET users with same date of birth
-// router.get('/birthday/?date=', authController.saveDate);
-
-// GET users with same date of birth
-// router.get('/birthday/:date', birthdayController.getSameDate);
 
 
 // Logout

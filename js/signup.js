@@ -31,6 +31,7 @@ if(btnSignup){
         }).then(json => {
 
             if(json.status === "success"){
+                localStorage.setItem("username", username);
                 alert("Sign up complete. Please login to start chatting!");
 
                 window.location = "login.html"

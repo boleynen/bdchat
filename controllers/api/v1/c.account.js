@@ -106,10 +106,14 @@ const getMyDate = (req, res) => {
 
     }).catch(error => {
         res.send(error)
+    })   
+}
+
+const getUserByUsername = (req, res) => {
+
+    Account.find({
+        // username: 
     })
-            
-    
-    
 }
 
 
