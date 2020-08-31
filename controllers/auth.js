@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Account = require('../models/Account');
 const jwt = require('jsonwebtoken');
+const config = require('config')
 
 
 const signup = async (req, res, next) => {
@@ -30,7 +31,7 @@ const signup = async (req, res, next) => {
             let token = jwt.sign({
                 uid: result._id,
                 username: result.username
-            }, "someSecret")
+            }, config.get('jwt.secret'))
 
             const user = new User({
                 date: date,
@@ -77,7 +78,7 @@ const login = async (req, res, next) => {
         let token = jwt.sign({
             uid: result.user._id,
             username: result.user.username
-        }, "someSecret");
+        }, config.get('jwt.secret'));
 
         return res.json({
             "status" : "success",

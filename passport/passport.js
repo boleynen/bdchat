@@ -1,6 +1,6 @@
 const passport = require('passport');
 const Account = require('../models/Account');
-
+const config = require('config');
 
 // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
 passport.use(Account.createStrategy());
@@ -15,7 +15,8 @@ var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = "someSecret";
+opts.secretOrKey = config.get('jwt.secret');
+
 
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
     Account.findOne({

@@ -30,15 +30,7 @@ let token = localStorage.getItem('token')
         }).then(json =>{
             if(json.status === "success"){
                 let chatMessage = json.data.chat
-                console.log("JSON data = "+JSON.stringify(json.data.chat))
-                // let chatMsg = `<li class="chatbox__output-received message">
-                //                 <div>
-                //                     <p class="user">${json.data.chat.user}</p>
-                //                     <p class="textmessage bold">${json.data.chat.message}</p>
-                //                 </div>
-                //             </li>`;
                 chatMessage.forEach(chat => {
-
                     if(chat.user === username){
                         let chatMsg = 
                         `<li class="chatbox__output-send message">

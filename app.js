@@ -4,20 +4,26 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const Promise = require("ejs");
+const config = require('config');
 const Primus = require('primus');
+
 
 const indexRouter = require('./routes/r.index');
 const accountRouter = require('./routes/r.account');
 const apiChatRouter = require('./routes/api/v1/r.chat');
 
 const passport = require('./passport/passport');
-const socketIo = require('socket.io');
+// const socketIo = require('socket.io');
 
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost:27017/bdchat', {
+mongoose.connect(config.get('Database.conn'), {
   useNewUrlParser: true, useUnifiedTopology: true});
+
+  console.log(process.env.node_env)
+
+
+
 
 const app = express();
 

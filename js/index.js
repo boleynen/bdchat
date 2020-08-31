@@ -1,6 +1,12 @@
 window.onload = () => {
+
+
     let username = localStorage.getItem('username')
     let token = localStorage.getItem('token')
+
+    if(!token){
+        window.location.href = 'login.html'
+      }
 
 
     // console.log(username);
@@ -47,3 +53,12 @@ window.onload = () => {
         console.log(error);
     });
 }
+
+      // PRIMUS LIVE 
+      let primus = Primus.connect('http://localhost:3000', {
+        reconnect: {
+        max: Infinity,
+        min: 500,
+        retries: 10
+        }
+    });
