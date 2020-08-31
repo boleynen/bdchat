@@ -1,4 +1,4 @@
-const Chat = require('../../../models/chat')
+const Chat = require('../../../models/Chat')
 const User = require('../../../models/User.js')
 const jwt = require('jsonwebtoken');
 const { json } = require('express');
