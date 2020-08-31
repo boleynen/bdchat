@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const config = require('config');
-const Primus = require('primus');
 
 
 const indexRouter = require('./routes/r.index');
@@ -23,6 +22,11 @@ mongoose.connect(process.env.dbconn || config.get('Database.conn'), {
   console.log(process.env.node_env)
 
 const app = express();
+
+const Primus = require('primus');
+const http = require('http');
+const server = http.createServer(app);
+const primus = require("./primus/primus").go(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
