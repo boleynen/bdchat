@@ -7,9 +7,9 @@ let go = (server) => {
     primus.on('connection', (spark) =>{
         console.log('received spark!');
 
-        spark.on('data', (jsonData) => {
+        spark.on('data', (json) => {
             // console.log(data);
-            primus.write(jsonData);
+            primus.write(json);
         })
     })
 }
