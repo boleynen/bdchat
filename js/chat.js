@@ -9,7 +9,9 @@ let chatbox = document.querySelector(".chatbox__output");
 let username = localStorage.getItem('username')
 let token = localStorage.getItem('token')
 
-   
+
+// GET CHAT MESSAGES ------------------------------------------------------------------------
+   // FETCH CURRENT USER TO GET CORRECT DATE
    const getChats = 
     fetch("http://localhost:3000/account/user/"+token, {
         'headers': {
@@ -20,6 +22,7 @@ let token = localStorage.getItem('token')
             return result.json();
     }).then(date => {
         let finalDate = date.substring(0,10);
+        // FETCH ALL CHAT MESSAGES FROM USERS WITH SAME BIRTHDAY
         fetch(`http://localhost:3000/api/v1/chat/${finalDate}`, {
             'headers': {
                 'Content-Type': 'application/json',
@@ -28,9 +31,11 @@ let token = localStorage.getItem('token')
         }).then(result => {
             return result.json();
         }).then(json =>{
+            // INSERT INTO HTML
             if(json.status === "success"){
                 let chatMessage = json.data.chat
                 chatMessage.forEach(chat => {
+                    // IF I SEND THIS MESSAGE, GIVE THIS CLASS
                     if(chat.user === username){
                         let chatMsg = 
                         `<li class="chatbox__output-send message">
@@ -40,6 +45,7 @@ let token = localStorage.getItem('token')
                             </div>
                         </li>`
                         chatbox.insertAdjacentHTML("beforeend", chatMsg);
+                    // IF I RECEIVED THIS MESSAGE, GIVE THAT CLASS
                     }else{
                         let chatMsg = 
                         `<li class="chatbox__output-received message">
@@ -63,7 +69,8 @@ let token = localStorage.getItem('token')
             console.log(err);
     });
 
-
+// POST CHAT MESSAGES ------------------------------------------------------------------------
+    // FETCH IF CLICKED ON BUTTON
     const postChats = 
     sendMsgBtn.addEventListener("click", function(e){
         e.preventDefault();
@@ -79,6 +86,7 @@ let token = localStorage.getItem('token')
         }).then(result =>{
             return result.json();
         }).then(json =>{
+            // INSERT INTO HTML
             if(json.status === "success"){
                 let chatMsg = `<li class="chatbox__output-send message">
                                 <div>

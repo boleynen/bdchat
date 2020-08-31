@@ -69,7 +69,6 @@ const getUsersWithSameDate = (req, res) => {
                 }
             })
         })
-        // res.redirect("/users/" + nameIds)
 
     }).catch(err => {
         res.json({

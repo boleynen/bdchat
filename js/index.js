@@ -8,8 +8,7 @@ window.onload = () => {
         window.location.href = 'login.html'
       }
 
-
-    // console.log(username);
+    // FETCH CURRENT USER TO GET CORRECT DATE 
     fetch("http://localhost:3000/account/user/"+token, {
         'headers': {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -18,6 +17,7 @@ window.onload = () => {
         return result.json();
     }).then(date => {
 
+        // FETCH ALL USERS WITH SAME BIRTHDAY
         fetch("http://localhost:3000/account/birthday/"+date, {
             'headers': {
                 'Content-Type': 'application/json'
@@ -26,6 +26,7 @@ window.onload = () => {
         }).then(response => {
             return response.json();
         }).then(response => {
+            // INSERT USERS INTO HTML
             let namesArr = response.data.usernames
             let ListPeopleOnline = document.querySelector(".chatbox__ul");
             let amountOfUsers = namesArr.length;
