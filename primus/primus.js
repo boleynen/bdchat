@@ -8,7 +8,7 @@ let go = (server) => {
         console.log('received spark!');
 
         spark.on('data', (json) => {
-            // console.log(data);
+            console.log(json);
             primus.write(json);
         })
     })

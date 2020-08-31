@@ -9,7 +9,6 @@ const accountController = require('../controllers/api/v1/c.account.js');
 /* GET users listing. */
 router.get("/", accountController.getAll);
 
-
 //GET my birthdate
 router.get("/user/:token", accountController.getMyDate);
 

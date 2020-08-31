@@ -22,9 +22,6 @@ mongoose.connect(process.env.dbconn || config.get('Database.conn'), {
 
   console.log(process.env.node_env)
 
-
-
-
 const app = express();
 
 // view engine setup
