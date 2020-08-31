@@ -1,4 +1,6 @@
 
+const base_url = "https://bd-chat.herokuapp.com";
+
 let sendMsgBtn = document.querySelector("#send-message");
 let input = document.querySelector(".chatbox__input");
 
@@ -13,7 +15,7 @@ let token = localStorage.getItem('token')
 // GET CHAT MESSAGES ------------------------------------------------------------------------
    // FETCH CURRENT USER TO GET CORRECT DATE
    const getChats = 
-    fetch("http://localhost:3000/account/user/"+token, {
+    fetch(base_url + "/account/user/"+token, {
         'headers': {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -23,7 +25,7 @@ let token = localStorage.getItem('token')
     }).then(date => {
         let finalDate = date.substring(0,10);
         // FETCH ALL CHAT MESSAGES FROM USERS WITH SAME BIRTHDAY
-        fetch(`http://localhost:3000/api/v1/chat/${finalDate}`, {
+        fetch(base_url + `/api/v1/chat/${finalDate}`, {
             'headers': {
                 'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -74,7 +76,7 @@ let token = localStorage.getItem('token')
     const postChats = 
     sendMsgBtn.addEventListener("click", function(e){
         e.preventDefault();
-        fetch("http://localhost:3000/api/v1/chat", {
+        fetch(base_url + "/api/v1/chat", {
             method: "post",
             'headers': {
                 'Content-Type': 'application/json',

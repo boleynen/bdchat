@@ -1,3 +1,5 @@
+const base_url = "https://bd-chat.herokuapp.com";
+
 window.onload = () => {
 
 
@@ -9,7 +11,7 @@ window.onload = () => {
       }
 
     // FETCH CURRENT USER TO GET CORRECT DATE 
-    fetch("http://localhost:3000/account/user/"+token, {
+    fetch(base_url + "/account/user/"+token, {
         'headers': {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
@@ -18,7 +20,7 @@ window.onload = () => {
     }).then(date => {
 
         // FETCH ALL USERS WITH SAME BIRTHDAY
-        fetch("http://localhost:3000/account/birthday/"+date, {
+        fetch(base_url + "/account/birthday/"+date, {
             'headers': {
                 'Content-Type': 'application/json'
             }

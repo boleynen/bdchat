@@ -1,4 +1,4 @@
-// const { response } = require("express");
+const base_url = "https://bd-chat.herokuapp.com";
 
 let btnSignup = document.querySelector("#btn-signup");
 
@@ -11,7 +11,7 @@ if(btnSignup){
         let password    = document.querySelector(".input-signup-pass").value;
         let date        = document.querySelector("#date-input").value;
     
-        fetch('http://localhost:3000/account/signup', {
+        fetch(base_url + '/account/signup', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json',

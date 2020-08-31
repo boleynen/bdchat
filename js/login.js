@@ -1,4 +1,4 @@
-
+const base_url = "https://bd-chat.herokuapp.com";
 
 let btnLogin= document.querySelector("#btn-login");
 
@@ -10,7 +10,7 @@ if(btnLogin){
         let username    = document.querySelector(".input-login-user").value;
         let password    = document.querySelector(".input-login-pass").value;
 
-        fetch('http://localhost:3000/account/login', {
+        fetch(base_url + '/account/login', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json',
